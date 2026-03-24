@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brussels Student Housing Guide 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --cream: #f5f0e8;
+    --gold: #b8922a;
+    --gold-light: #e8c96a;
+    --red: #c0392b;
+    --blue: #2c5282;
+    --blue-light: #ebf4ff;
+    --muted: #6b6b7a;
+    --border: #ddd8cc;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border: 2px solid rgba(184,146,42,0.25);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(184,146,42,0.15);
+    border-radius: 50%;
+  }
+  .cover-flag {
+    display: flex; gap: 6px; margin-bottom: 32px;
+  }
+  .cover-flag span {
+    display: block; height: 6px; width: 40px; border-radius: 2px;
+  }
+  .cover-flag .f1 { background: #000; }
+  .cover-flag .f2 { background: var(--gold); }
+  .cover-flag .f3 { background: var(--red); }
+  .cover-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .cover h1 em {
+    font-style: normal;
+    color: var(--gold-light);
+  }
+  .cover-sub {
+    color: rgba(245,240,232,0.65);
+    font-weight: 300;
+    max-width: 520px;
+    font-size: 14px;
+  }
+  .cover-year {
+    position: absolute;
+    bottom: 28px; right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: rgba(184,146,42,0.12);
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 60px;
+  }
+  .toc-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .toc-list {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .toc-item {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    padding: 10px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .toc-item:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .toc-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    font-weight: 600;
+    line-height: 1;
+  }
+  .toc-item:hover .toc-num { color: var(--gold-light); }
+  .toc-text { font-size: 13px; font-weight: 500; }
+
+  /* ── CHAPTER WRAPPER ── */
+  .chapters { max-width: 900px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── CHAPTER ── */
+  .chapter {
+    margin-top: 64px;
+    border-top: 3px solid var(--ink);
+    padding-top: 48px;
+  }
+  .chapter-header {
+    display: flex; align-items: flex-start; gap: 24px;
+    margin-bottom: 40px;
+  }
+  .chapter-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 0.85;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .chapter-meta { flex: 1; }
+  .chapter-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .chapter-intro {
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 300;
+    max-width: 580px;
+    border-left: 2px solid var(--gold);
+    padding-left: 14px;
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 40px; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+  }
+
+  p { margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── CALLOUT BOXES ── */
+  .box {
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .box-info {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+  }
+  .box-warn {
+    background: #fff8e6;
+    border-left: 4px solid var(--gold);
+  }
+  .box-danger {
+    background: #fff0ef;
+    border-left: 4px solid var(--red);
+  }
+  .box-title {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .box-info .box-title { color: var(--blue); }
+  .box-warn .box-title { color: #7a5a00; }
+  .box-danger .box-title { color: var(--red); }
+  .box p { font-size: 14px; margin-bottom: 6px; }
+  .box p:last-child { margin-bottom: 0; }
+
+  /* ── STEP LIST ── */
+  .steps { counter-reset: step; list-style: none; }
+  .steps li {
+    counter-increment: step;
+    display: flex; gap: 16px;
+    margin-bottom: 20px;
+  }
+  .steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    margin-top: 2px;
+  }
+  .steps li > div { flex: 1; }
+  .step-title { font-weight: 600; margin-bottom: 4px; }
+  .step-body { font-size: 14px; color: var(--muted); }
+
+  /* ── BULLET LIST ── */
+  .bullets { list-style: none; }
+  .bullets li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .bullets li:last-child { border-bottom: none; }
+  .bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .bullets li strong { color: var(--ink); }
+
+  /* ── PLATFORMS GRID ── */
+  .platforms {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .platform-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px;
+    transition: box-shadow 0.2s;
+  }
+  .platform-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+  .platform-name { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+  .platform-url { font-size: 11px; color: var(--gold); font-family: monospace; margin-bottom: 8px; }
+  .platform-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .platform-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+
+  /* ── RENT TABLE ── */
+  .rent-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .rent-table th {
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  .rent-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .rent-table tr:last-child td { border-bottom: none; }
+  .rent-table tr:nth-child(even) td { background: rgba(0,0,0,0.02); }
+  .rent-price { font-weight: 600; color: var(--blue); }
+
+  /* ── FRAUD CHECKLIST ── */
+  .fraud-list { list-style: none; }
+  .fraud-list li {
+    display: flex; gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .fraud-list li:last-child { border-bottom: none; }
+  .fraud-icon {
+    width: 22px; height: 22px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-weight: 700;
+  }
+  .fraud-list strong { color: var(--ink); }
+
+  /* ── CONTRACT CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px;
+    border: 2px solid var(--gold);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .checklist li strong { color: var(--ink); }
+
+  /* ── FINE PRINT ── */
+  .penalties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  @media (max-width: 600px) { .penalties { grid-template-columns: 1fr; } }
+  .penalty-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--red);
+    border-radius: 4px;
+    padding: 16px;
+  }
+  .penalty-who { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .penalty-title { font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+  .penalty-desc { font-size: 13px; color: var(--muted); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 16px;
+    margin: 32px 0;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── CONTACT CARD ── */
+  .contact-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 16px 0;
+    display: flex; gap: 20px; align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .contact-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .contact-name { font-weight: 600; font-size: 15px; }
+  .contact-detail { font-size: 13px; color: var(--blue); }
+  .contact-sep { width: 1px; background: var(--border); align-self: stretch; }
+
+  @media (max-width: 640px) {
+    .cover { padding: 48px 28px 40px; }
+    .toc { padding: 28px; }
+    .chapters { padding: 0 20px 60px; }
+    .chapter-num { font-size: 48px; }
+    .cover-year { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-flag"><span class="f1"></span><span class="f2"></span><span class="f3"></span></div>
+  <div class="cover-label">Reference Guide · Brussels-Capital Region</div>
+  <h1>Student Housing<br>Guide — <em>Brussels</em></h1>
+  <p class="cover-sub">A comprehensive overview of domiciliation rules, housing search strategies, and rental contract obligations for non-EEA students.</p>
+  <div class="cover-year">2026</div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-list">
+    <a href="#ch1" class="toc-item"><span class="toc-num">I</span><span class="toc-text">Domiciliation</span></a>
+    <a href="#ch2" class="toc-item"><span class="toc-num">II</span><span class="toc-text">Finding Student Housing</span></a>
+    <a href="#ch3" class="toc-item"><span class="toc-num">III</span><span class="toc-text">Student Rental Contract</span></a>
+  </div>
+</div>
+
+<div class="chapters">
+
+<!-- ══════════════════════════════════════ -->
+<!-- CHAPTER 1: DOMICILIATION             -->
+<!-- ══════════════════════════════════════ -->
+<div class="chapter" id="ch1">
+  <div class="chapter-header">
+    <div class="chapter-num">I</div>
+    <div class="chapter-meta">
+      <div class="chapter-label">Chapter One</div>
+      <h2 class="chapter-title">Domiciliation &amp;<br>Residency Registration</h2>
+      <p class="chapter-intro">For non-EEA students, Belgian residence rules are strictly separate from housing registration. Understanding this distinction is essential before you arrive.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">The Domicile vs. Student Housing Rule</h3>
+    <p>In the Brussels-Capital Region, standard student accommodations are <strong>designated for study purposes only</strong> and are legally not recognised as a "principal residence." This has important consequences for non-EEA students.</p>
+
+    <div class="box box-warn">
+      <div class="box-title">No Official Domicile in Student Housing</div>
+      <p>Official domicile registration (<em>domiciliation</em>) is <strong>generally not permitted</strong> in dedicated student housing. These contracts specifically exclude the "principal residence" provisions of the Brussels Housing Code.</p>
+      <p>Instead, international students may register their address as a <strong>"place of establishment" (<em>lieu d'établissement</em>)</strong> if required by local authorities — provided their official permanent domicile remains in their home country.</p>
+    </div>
+
+    <ul class="bullets">
+      <li><strong>Mandatory proof of enrollment:</strong> To maintain legal status under a student lease, you must provide a valid enrollment certificate from a recognised educational institution upon signing and at every renewal.</li>
+      <li><strong>Home country domicile:</strong> Your official permanent domicile must remain registered in your home country for the duration of your studies.</li>
+      <li><strong>Right to register an address:</strong> Any clause in a rental contract that prohibits a tenant from registering their residential address is legally void under the Brussels Housing Code.</li>
+    </ul>
+  </div>
+
+  <div class="divider">Legal Framework for Stay</div>
+
+  <div class="section">
+    <h3 class="section-title">Stays of More Than 90 Days</h3>
+    <p>Any non-EEA foreigner authorised to stay in Belgium for more than three months must be inscribed in the <strong>Foreigner's Register (<em>registre des étrangers</em>)</strong> by the municipal administration.</p>
+
+    <ul class="bullets">
+      <li><strong>Stay Authorisation:</strong> You must apply for authorisation via a Belgian diplomatic or consular post in your home country before travelling.</li>
+      <li><strong>Financial Means:</strong> You must demonstrate sufficient financial resources for subsistence throughout your stay.</li>
+      <li><strong>Health Insurance:</strong> Valid comprehensive health insurance coverage is required.</li>
+      <li><strong>Clean Criminal Record:</strong> A certificate of good conduct from your home country may be requested.</li>
+    </ul>
+  </div>
+
+  <div class="divider">Step-by-Step Process</div>
+
+  <div class="section">
+    <h3 class="section-title">Registration Process — Visa D &amp; A-Card</h3>
+    <p>If you hold a <strong>Visa D</strong> (long-stay visa with a restrictive provision for studies), you must register with your commune to obtain your <strong>A-Card (<em>Carte A</em>)</strong>.</p>
+
+    <ul class="steps">
+      <li>
+        <div>
+          <div class="step-title">Book an Appointment with Municipal Administration</div>
+          <div class="step-body">Depending on your commune, an appointment may or may not be required. Check your specific municipality's website. For Brussels 1000, contact the student registration office directly.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Attend Your Appointment with Required Documents</div>
+          <div class="step-body">Bring all of the following without exception — missing any document will result in a rescheduled appointment.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Police Residence Verification</div>
+          <div class="step-body">After your appointment, a local police officer will visit your address to verify that you actually reside there. You must be present. This is a standard step and not a cause for concern.</div>
+        </div>
+      </li>
+      <li>
+        <div>
+          <div class="step-title">Second Appointment &amp; A-Card Issuance</div>
+          <div class="step-body">Once the police confirm your residence, a second appointment is automatically scheduled by the Municipal Administration to finalise your registration and order your Residence Permit (A-Card).</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="box box-info">
+      <div class="box-title">Documents Required at Appointment</div>
+      <ul class="bullets" style="margin-top:8px;">
+        <li><strong>National Passport</strong> with a valid Visa D</li>
+        <li><strong>School Registration Certificate</strong> — must be the required standard form from your institution</li>
+        <li><strong>Passport Photo</strong> — 1 recent photo</li>
+        <li><strong>Registration Fee</strong> — approximately €35</li>
+      </ul>
+    </div>
+
+    <div class="contact-card">
+      <div>
+        <div class="contact-label">Contact — City of Brussels (1000)</div>
+        <div class="contact-name">Student Registration Office</div>
+      </div>
+      <div class="contact-sep"></div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-detail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9fecebeafbfaf1ebdffdedeafcf6ebe6b1fdfa">[email&#160;protected]</a></div>
+      </div>
+      <div class="contact-sep"></div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-detail">02 279 22 11</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CHAPTER 2: FINDING HOUSING           -->
+<!-- ══════════════════════════════════════ -->
+<div class="chapter" id="ch2">
+  <div class="chapter-header">
+    <div class="chapter-num">II</div>
+    <div class="chapter-meta">
+      <div class="chapter-label">Chapter Two</div>
+      <h2 class="chapter-title">Finding Student<br>Housing in Brussels</h2>
+      <p class="chapter-intro">A student room in Belgium is commonly called a <em>kot</em>. Brussels offers several routes — from university-managed residences to the private market — each with its own trade-offs.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">University Residences</h3>
+    <p>Check with your institution's housing office <strong>first and as early as possible</strong>. Universities such as ULB (<em>Université Libre de Bruxelles</em>) and VUB (<em>Vrije Universiteit Brussel</em>) operate their own on-campus or near-campus residences — generally the most affordable option available.</p>
+    <div class="box box-warn">
+      <div class="box-title">Apply Immediately Upon Admission</div>
+      <p>Demand for university residences is very high. Do not wait until your visa is confirmed — submit your housing application as soon as you receive your offer of admission.</p>
+      <p>Typical price range: <strong>€350 – €550 / month</strong>, often with utilities included.</p>
+    </div>
+  </div>
+
+  <div class="divider">Dedicated Platforms</div>
+
+  <div class="section">
+    <h3 class="section-title">Student Housing Platforms</h3>
+    <p>These platforms are specifically designed for students and include verified listings to help avoid scams.</p>
+    <div class="platforms">
+      <div class="platform-card">
+        <div class="platform-name">MyKot</div>
+        <div class="platform-url">mykot.be</div>
+        <div class="platform-desc">Official platform for most Brussels universities (French and Dutch-speaking). Thousands of verified rooms using standardised model contracts.</div>
+        <div class="platform-badge">Official · Verified</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-name">Brik</div>
+        <div class="platform-url">brik.be</div>
+        <div class="platform-desc">For students at Dutch-speaking institutions (VUB, EhB, KU Leuven Brussels). Manages own residences and comprehensive search tool.</div>
+        <div class="platform-badge">Dutch-speaking</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-name">Brukot</div>
+        <div class="platform-url">brukot.be</div>
+        <div class="platform-desc">Long-standing platform where private landlords list rooms and kots specifically for students and interns.</div>
+        <div class="platform-badge">Private Listings</div>
+      </div>
+      <div class="platform-card">
+        <div class="platform-name">Xior</div>
+        <div class="platform-url">xior.be</div>
+        <div class="platform-desc">Purpose-built student accommodation provider with multiple locations across Brussels and Belgium.</div>
+        <div class="platform-badge">Purpose-Built</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Private Market &amp; Coliving</h3>
+    <p>For shared apartments with other young professionals or international students:</p>
+    <ul class="bullets">
+      <li><strong>HousingAnywhere &amp; Spotahome:</strong> Good for booking remotely — offer video tours and verified listings, though often charge a booking fee.</li>
+      <li><strong>Facebook Groups:</strong> Search "BXL à LOUER," "Brussels Housing, Rooms, Apartments, Sublets," or "Appartager Bruxelles." Useful for finding roommates, but exercise caution (see Fraud section below).</li>
+    </ul>
+  </div>
+
+  <div class="divider">2026 Rent Estimates</div>
+
+  <div class="section">
+    <h3 class="section-title">Typical Monthly Rent</h3>
+    <p>Prices depend heavily on whether you are in a subsidised university kot or the private market, and on the neighbourhood.</p>
+    <table class="rent-table">
+      <thead>
+        <tr>
+          <th>Housing Type</th>
+          <th>Est. Monthly Rent</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>University Kot</td>
+          <td class="rent-price">€350 – €550</td>
+          <td>Most affordable; very high demand; basic amenities.</td>
+        </tr>
+        <tr>
+          <td>Private Kot (Student Room)</td>
+          <td class="rent-price">€500 – €750</td>
+          <td>Room in shared house; typically includes utilities and internet.</td>
+        </tr>
+        <tr>
+          <td>Shared Flat (Colocation)</td>
+          <td class="rent-price">€550 – €850</td>
+          <td>Room in larger apartment; varies by neighbourhood.</td>
+        </tr>
+        <tr>
+          <td>Private Studio</td>
+          <td class="rent-price">€800 – €1,050</td>
+          <td>Independent living; often excludes utilities.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="box box-info">
+      <div class="box-title">Charges: TTC vs HC</div>
+      <p>When reading ads, always check whether the price is <strong>TTC (<em>Toutes Taxes Comprises</em> — all-inclusive)</strong> or <strong>HC (<em>Hors Charges</em> — excluding utilities)</strong>. Utilities typically add <strong>€100–€150/month</strong> if not included.</p>
+    </div>
+  </div>
+
+  <div class="divider">Neighbourhood Overview</div>
+
+  <div class="section">
+    <h3 class="section-title">Areas to Know</h3>
+    <p>Brussels is a patchwork city — a "good" neighbourhood can have a rough street three blocks away. "Unsafe" is always relative, but some areas are consistently flagged by students.</p>
+
+    <div class="box box-warn">
+      <div class="box-title">Higher-Cost, Well-Connected Areas</div>
+      <p><strong>Ixelles</strong> (Flagey/Châtelain), <strong>Etterbeek</strong> (near the EU Quarter), and <strong>Woluwe-Saint-Lambert</strong> are popular and well-served but carry a neighbourhood premium on rent.</p>
+    </div>
+
+    <div class="box box-danger">
+      <div class="box-title">Areas Requiring Extra Caution for Housing</div>
+      <p><strong>Gare du Midi surroundings</strong> (towards Anderlecht/Kuregem): higher rates of petty crime, especially at night.</p>
+      <p><strong>Gare du Nord surroundings</strong>: borders the Red Light District (Rue d'Aerschot); can feel desolate at night.</p>
+      <p><strong>Lower/Central Molenbeek</strong> (near Ribaucourt or Beekkant metro): higher instances of street harassment. Note: Upper Molenbeek near Scheutbos is green and residential.</p>
+      <p><strong>Anderlecht (Kuregem/Clemenceau)</strong>: cheaper rent, but street safety concerns at night. Anderlecht is large — ask fellow students for their specific experience.</p>
+      <p><strong>Saint-Josse-ten-Noode</strong>: very central and affordable, but some parts near Place Madou or Place Rogier can be chaotic and noisy.</p>
+    </div>
+  </div>
+
+  <div class="divider">Fraud Prevention</div>
+
+  <div class="section">
+    <h3 class="section-title">Recognising &amp; Avoiding Rental Fraud</h3>
+    <p>Fake listings are a persistent problem. Fraudulent "landlords" — often claiming to be abroad — convince students to transfer large sums to foreign bank accounts under the guise of securing accommodation. Once payment is made, they disappear.</p>
+
+    <ul class="fraud-list">
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>Too good to be true:</strong> If the rent is significantly lower than comparable listings, it almost certainly is a scam.</div>
+      </li>
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>No direct contact possible:</strong> You should always be able to meet the landlord or schedule a video call. Persistent excuses to avoid this are a major red flag.</div>
+      </li>
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>Payment before contract:</strong> Never transfer money before signing a contract. Requests for payment via Western Union, MoneyGram, or cryptocurrency are almost always fraudulent.</div>
+      </li>
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>Unsolicited ID requests:</strong> You may need to present ID when signing a contract, but never send a copy without being certain the landlord and property are genuine. Fraudsters misuse ID for identity theft.</div>
+      </li>
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>Stolen photos:</strong> Run a Google Reverse Image Search on all property photos to check if they appear elsewhere online or belong to a different listing.</div>
+      </li>
+      <li>
+        <div class="fraud-icon">!</div>
+        <div><strong>No written contract:</strong> A rental agreement is a legal requirement in Belgium. Never occupy any accommodation without a signed contract.</div>
+      </li>
+    </ul>
+
+    <div class="box box-danger">
+      <div class="box-title">If You Are a Victim of Fraud</div>
+      <p>File a formal police report immediately. If you are uncertain about a landlord, contact <strong>KU Leuven Stuvo</strong> before transferring any money or signing any document. You can also report suspected fraud (even if you haven't fallen victim yet) to the Belgian authorities to help prevent further scams.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ -->
+<!-- CHAPTER 3: RENTAL CONTRACT           -->
+<!-- ══════════════════════════════════════ -->
+<div class="chapter" id="ch3">
+  <div class="chapter-header">
+    <div class="chapter-num">III</div>
+    <div class="chapter-meta">
+      <div class="chapter-label">Chapter Three</div>
+      <h2 class="chapter-title">The Student<br>Rental Contract</h2>
+      <p class="chapter-intro">A "Student Housing Lease" (<em>Bail de logement étudiant</em>) is a specific legal category under the Brussels Housing Code. Both landlords and tenants have binding obligations from the moment of signing.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Pre-Contractual Disclosure</h3>
+    <p>Before a lease is signed, the landlord is <strong>legally required</strong> to provide the following to any prospective tenant. These details must also appear in any public advertisement for the property.</p>
+    <ul class="checklist">
+      <li><div class="check-box"></div><div><strong>Property details:</strong> Exact address, floor, habitable surface area, and the official indicative reference rent.</div></li>
+      <li><div class="check-box"></div><div><strong>Rent amount:</strong> Stated separately — it cannot include utility charges.</div></li>
+      <li><div class="check-box"></div><div><strong>Itemised charges:</strong> An estimated list of common and private charges (water, gas, electricity, etc.).</div></li>
+      <li><div class="check-box"></div><div><strong>Utility infrastructure:</strong> Whether individual meters exist, and if so, their EAN identification codes.</div></li>
+      <li><div class="check-box"></div><div><strong>Energy Performance Certificate (PEB/EPC):</strong> The certified energy rating of the property.</div></li>
+      <li><div class="check-box"></div><div><strong>Building management:</strong> How the building is managed (syndic, owner-managed, etc.).</div></li>
+      <li><div class="check-box"></div><div><strong>Legal status:</strong> Clear disclosure if the property has been banned from rental due to safety or health violations.</div></li>
+    </ul>
+  </div>
+
+  <div class="divider">Mandatory Contract Content</div>
+
+  <div class="section">
+    <h3 class="section-title">What the Contract Must Contain</h3>
+    <p>To qualify as a student lease, the tenant must provide proof of enrollment in a secondary or higher education institution. The written contract must include:</p>
+    <ul class="bullets">
+      <li><strong>Identity of all parties:</strong> Full legal names and contact details of both landlord and tenant.</li>
+      <li><strong>Start date:</strong> The official first day of the tenancy.</li>
+      <li><strong>Property description:</strong> Exact address, floor, habitable surface area, and reference rent.</li>
+      <li><strong>Rent amount:</strong> Stated separately from all charges — this separation is a fundamental legal principle.</li>
+      <li><strong>Reference rent:</strong> From the official indicative grid, where available.</li>
+      <li><strong>Charges:</strong> Itemised list and estimate of common and private charges, specifying whether each is a flat rate (<em>forfait</em>) or based on actual costs (<em>frais réels</em>).</li>
+      <li><strong>Utility meters:</strong> Whether individual meters exist, including EAN codes.</li>
+      <li><strong>Duration:</strong> Generally 12 months or less for student leases, with clear start and end dates. If a tenant remains after the term without landlord opposition, the contract is typically extended by one year.</li>
+    </ul>
+
+    <div class="box box-info">
+      <div class="box-title">Mandatory Government Annex</div>
+      <p>A government-drafted legal annex explaining safety standards, rent indexation rules, charge regulations, repair obligations, and termination procedures <strong>must be physically attached</strong> to every lease. A contract without this annex is non-compliant.</p>
+    </div>
+  </div>
+
+  <div class="divider">Financial Obligations</div>
+
+  <div class="section">
+    <h3 class="section-title">Security Deposit</h3>
+    <p>A landlord may request a rental guarantee to cover potential unpaid obligations at the end of the lease.</p>
+    <ul class="bullets">
+      <li><strong>Maximum amount:</strong> As of 1 November 2024, the deposit cannot exceed <strong>two months' rent</strong>.</li>
+      <li><strong>Placement:</strong> Must be held in a <strong>frozen, individualised bank account in the tenant's name</strong>. The landlord holds a lien on the account but cannot access funds without consent or a court order.</li>
+      <li><strong>Return:</strong> The full deposit plus any accrued interest is returned to the tenant upon satisfactory completion of all obligations — verified by joint written agreement or a court ruling.</li>
+      <li><strong>Gradual build-up option:</strong> A bank guarantee allowing the tenant to build the deposit through fixed monthly payments over a maximum of three years is also accepted.</li>
+    </ul>
+    <div class="box box-info">
+      <div class="box-title">Financial Assistance</div>
+      <p>The <strong>Fonds du Logement</strong> (Housing Fund) provides financial support and professional guidance to help tenants establish a rental deposit if needed.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 class="section-title">Taxes &amp; Charges — What You May Owe</h3>
+    <p>The key principle: <strong>a tax is only payable by the tenant if it is explicitly named in the signed contract.</strong> If it is not listed, the landlord cannot demand payment.</p>
+    <ul class="bullets">
+      <li><strong>Property Tax (<em>précompte immobilier</em>):</strong> This is the landlord's responsibility alone and <strong>cannot be passed to the tenant</strong> under a student lease — any contract clause attempting to do so is void.</li>
+      <li><strong>Secondary Residence Tax (<em>Taxe sur les résidences non-principales</em>):</strong> Applied when you live in a municipality without being officially registered. Can be as high as €2,700/year. Many communes (including Schaerbeek) offer exemptions for full-time students.</li>
+      <li><strong>Furnished Dwelling Tax (<em>Taxe sur les logements garnis</em>):</strong> In the City of Brussels, landlords are taxed €500/year (indexed) for furnished units. This can be passed to the tenant <em>only if the contract specifies it explicitly.</em> Student exemptions do not apply automatically for this tax.</li>
+      <li><strong>Waste Collection Tax (<em>Taxe sur les immondices</em>):</strong> A regional charge for waste collection, commonly included in the "charges" section of student contracts.</li>
+    </ul>
+  </div>
+
+  <div class="divider">Practical Obligations</div>
+
+  <div class="section">
+    <h3 class="section-title">Inventory, Registration &amp; Insurance</h3>
+    <ul class="bullets">
+      <li><strong>Joint Inventory (<em>État des Lieux</em>):</strong> A detailed written inspection must be completed jointly by both parties — at move-in and move-out. Cost is typically shared equally. This document is the legal basis for any damage claims at the end of the lease.</li>
+      <li><strong>Lease Registration:</strong> The landlord must register the contract with the Regional Lease Registration Service within <strong>two months</strong> of signing. Registration is free. If the landlord fails to register within this period, the tenant may terminate the lease without notice or penalty, and the landlord loses the right to index the rent.</li>
+      <li><strong>Fire &amp; Water Damage Insurance (Mandatory):</strong> Tenants are legally responsible for fire or water damage unless they can prove they were not at fault. You must obtain an insurance policy before entry and provide annual proof of payment. Some platforms (e.g., MyKot) include this insurance directly in the contract.</li>
+      <li><strong>Waiver of Recourse (<em>Abandon de Recours</em>):</strong> If a tenant fails to obtain insurance, the landlord may add a waiver of recourse clause to their own building insurance and charge the cost to the tenant.</li>
+      <li><strong>Contents Insurance (Recommended):</strong> Covers your personal belongings (laptop, phone, furniture). Not always legally required, but frequently stipulated in contracts.</li>
+    </ul>
+  </div>
+
+  <div class="divider">Penalties for Non-Compliance</div>
+
+  <div class="section">
+    <h3 class="section-title">Legal Consequences</h3>
+    <div class="penalties">
+      <div class="penalty-card">
+        <div class="penalty-who">Landlord Liability</div>
+        <div class="penalty-title">Failure to Register Lease</div>
+        <div class="penalty-desc">Loses the right to index the rent. Tenant may terminate without notice or penalty.</div>
+      </div>
+      <div class="penalty-card">
+        <div class="penalty-who">Landlord Liability</div>
+        <div class="penalty-title">Renting Unsafe / Banned Housing</div>
+        <div class="penalty-desc">Fines ranging from <strong>€2,000 to €25,000</strong> under the Housing Code.</div>
+      </div>
+      <div class="penalty-card">
+        <div class="penalty-who">Landlord Liability</div>
+        <div class="penalty-title">Illegal Eviction</div>
+        <div class="penalty-desc">Evicting without a court order makes the landlord liable for an indemnity equal to <strong>18 months' rent</strong>.</div>
+      </div>
+      <div class="penalty-card">
+        <div class="penalty-who">Tenant Liability</div>
+        <div class="penalty-title">Serious Breach of Contract</div>
+        <div class="penalty-desc">Two months of rent arrears or failure to pay the deposit can lead to <strong>judicial annulment</strong> of the contract at the tenant's expense.</div>
+      </div>
+    </div>
+
+    <div class="box box-danger">
+      <div class="box-title">Clauses That Are Always Void</div>
+      <p><strong>Prohibition on registering your address:</strong> Any clause forbidding a tenant from officially registering their residential address at the rental property has no legal force.</p>
+      <p><strong>Blanket ban on pets:</strong> A complete prohibition on keeping pets is generally void. The contract may set reasonable conditions (no disturbance, lim
